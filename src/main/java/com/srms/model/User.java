@@ -1,10 +1,13 @@
 package com.srms.model;
 
 
+import com.srms.utility.UserNote;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -49,7 +52,8 @@ public class User {
         return Objects.hash(id, fullName, email);
     }
 
-    private String userNotes;
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    private List<UserNote> userNotes = new ArrayList<>();
 
 
     @Override
