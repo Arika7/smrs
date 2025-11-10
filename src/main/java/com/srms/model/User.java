@@ -1,7 +1,6 @@
 package com.srms.model;
 
 
-import com.srms.utility.UserNote;
 import jakarta.persistence.*;
 import lombok.*;
 

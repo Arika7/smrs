@@ -1,7 +1,6 @@
-package com.srms.utility;
+package com.srms.model;
 
 
-import com.srms.model.User;
 import jakarta.persistence.*;
 import lombok.*;
 
