@@ -36,6 +36,7 @@ public class DashBoardService {
         Map<String, List<UserSummary>> platforms = new LinkedHashMap<>();
 
         for(Status status : Status.values()){
+            if(status == Status.OFF_SHIFT) continue;
             List<UserSummary> users = grouped.getOrDefault(status.name(), List.of());
             users = users.stream().sorted(Comparator.comparing(UserSummary::getFullName)).toList();
             platforms.put(status.name(),users);

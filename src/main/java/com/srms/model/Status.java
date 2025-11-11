@@ -12,6 +12,6 @@ public enum Status {
     MEETING,         // На встрече
     BREAK,           // На перерыве
     STATION_ISSUES,  // Проблемы с оборудованием / станцией
-    BRB              // Be Right Back — короткая пауза
-
+    BRB,                // Be Right Back — короткая пауза
+    OFF_SHIFT
 }
