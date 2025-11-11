@@ -1,7 +1,7 @@
 package com.srms.model;
 
 public enum Status {
-    ShiftLead,
+    SHIFT_LEAD,
     CS,              // Customer Support — отвечает клиентам
     PSR,             // Courier Support — отвечает курьерам
     VENUE,           // Venue Support — работает с ресторанами
