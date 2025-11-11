@@ -4,6 +4,7 @@ package com.srms.service;
 import com.srms.dto.DashboardResponse;
 import com.srms.dto.UserSummary;
 import com.srms.model.Status;
+import com.srms.model.User;
 import com.srms.repository.UserRepository;
 import com.srms.repository.projection.UserSummaryProjection;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class DashBoardService {
     public DashboardResponse buildDashboard(){
         List<UserSummaryProjection> raw = userRepository.findAllProjectedBy();
 
-        List<UserSummary> summaries = raw.stream().map(p-> new UserSummary(p.getId(),p.getFullName(), p.getStatus().name())).toList();
+        List<UserSummary> summaries = raw.stream().map(p-> new UserSummary(p.getId(),p.getFullName(), p.getStatus().name(), p.getStatusComment(), p.getBreakStartTime(), p.getBreakEndTime())).toList();
 
         Map<String, List<UserSummary>> grouped = summaries.stream().collect(Collectors.groupingBy(UserSummary::getStatus));
 
@@ -48,6 +49,18 @@ public class DashBoardService {
 
         return new DashboardResponse(platforms, bottomPanel);
 
+
+    }
+
+    private UserSummary toUserSummary(User u){
+        return new UserSummary(
+                u.getId(),
+                u.getFullName(),
+                u.getStatus().name(),
+                u.getStatusComment(),
+                u.getBreakStartTime(),
+                u.getBreakEndTime()
+        );
 
     }
 }

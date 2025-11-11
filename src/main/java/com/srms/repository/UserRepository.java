@@ -2,6 +2,7 @@ package com.srms.repository;
 
 
 import com.srms.model.User;
+import com.srms.repository.projection.UserSearchProjection;
 import com.srms.repository.projection.UserSummaryProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,6 +24,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User  u where lower(u.fullName) like lower(CONCAT('%', :keyword, '%') ) or " +
             "lower(u.email) like lower(concat('%', :keyword, '%') ) ")
-    List<User> searchUsers(@Param("keyword") String keyword);
+    List<UserSearchProjection> searchUsers(@Param("keyword") String keyword);
 
 }

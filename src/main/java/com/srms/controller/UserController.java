@@ -1,7 +1,9 @@
 package com.srms.controller;
 
 
+import com.srms.dto.UserSearchDto;
 import com.srms.model.User;
+import com.srms.repository.UserRepository;
 import com.srms.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final UserRepository userRepository;
 
 
     @GetMapping("/{id}")
@@ -23,9 +26,16 @@ public class UserController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<User>> searchUsers(@RequestParam String keyword){
-        List<User> users = userService.searchUsers(keyword);
-        return ResponseEntity.ok(users);
+    public ResponseEntity<List<UserSearchDto>> searchUsers(@RequestParam String keyword){
+        List<UserSearchDto> results = userRepository.searchUsers(keyword).stream().map(p ->
+                new UserSearchDto(
+                        p.getId(),
+                        p.getFullName(),
+                        p.getEmail(),
+                        p.getStatus().name()
+                )).toList();
+
+        return ResponseEntity.ok(results);
     }
 
     @PostMapping

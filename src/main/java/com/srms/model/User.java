@@ -37,6 +37,10 @@ public class User {
 
     private LocalDateTime lastStatusUpdate;
 
+    private LocalDateTime breakStartTime;
+    private LocalDateTime breakEndTime;
+    private String statusComment;
+
 
     @Override
     public boolean equals(Object o) {
