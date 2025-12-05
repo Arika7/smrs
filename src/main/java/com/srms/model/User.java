@@ -55,7 +55,7 @@ public class User {
         return Objects.hash(id, fullName, email);
     }
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    @OneToMany(mappedBy = "author", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private List<UserNote> userNotes = new ArrayList<>();
 
 

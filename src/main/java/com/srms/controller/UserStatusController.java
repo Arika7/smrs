@@ -20,7 +20,7 @@ public class UserStatusController {
     private final UserManagementService userManagementService;
 
     @PatchMapping("/changeStatus")
-    public ResponseEntity<StatusChangeResponse> changeStatus(@RequestBody @Valid StatusChangeRequest request) {
+    public ResponseEntity<StatusChangeResponse> changeStatus(@RequestBody StatusChangeRequest request) {
         StatusChangeResponse response = userManagementService.changeStatus(request);
         return ResponseEntity.ok(response);
     }
