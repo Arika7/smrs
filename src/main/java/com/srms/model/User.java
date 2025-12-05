@@ -35,11 +35,19 @@ public class User {
     @Column(nullable = false)
     private Status status;
 
-    private LocalDateTime lastStatusUpdate;
+    private Integer breakTime;
 
-    private LocalDateTime breakStartTime;
-    private LocalDateTime breakEndTime;
-    private String statusComment;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shift_id")
+    private Shift shift;
+
+    @OneToOne
+    @JoinColumn(name = "current_status_id")
+    private UserStatus currentStatus;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserStatus> statuses;
+
 
 
     @Override
@@ -55,7 +63,7 @@ public class User {
         return Objects.hash(id, fullName, email);
     }
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    @OneToMany(mappedBy = "targetUser", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private List<UserNote> userNotes = new ArrayList<>();
 
 

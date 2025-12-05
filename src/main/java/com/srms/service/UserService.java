@@ -2,6 +2,7 @@ package com.srms.service;
 
 import com.srms.model.User;
 import com.srms.repository.UserRepository;
+import com.srms.repository.projection.UserSearchProjection;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class UserService {
     }
 
 
-    public List<User> searchUsers(String keyword){
+    public List<UserSearchProjection> searchUsers(String keyword){
         if(keyword == null || keyword.trim().isEmpty()){
             return new ArrayList<>();
         }
